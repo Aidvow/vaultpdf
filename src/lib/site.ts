@@ -45,10 +45,11 @@ export const SITE_CONFIG = {
   tagline: "Private PDF tools that run 100% in your browser.",
   description:
     "Merge, split, rotate, watermark, convert images to PDF, and strip hidden metadata entirely on your device. Zero uploads, zero servers, built for sensitive documents.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://vaultpdf.tools",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://vaultpdf-khaki.vercel.app",
   contactEmail: "hello@vaultpdf.tools",
   adsenseId: process.env.NEXT_PUBLIC_ADSENSE_ID || "",
   gaId: process.env.NEXT_PUBLIC_GA_ID || "",
+  gscVerification: process.env.NEXT_PUBLIC_GSC_VERIFICATION || "",
   showAdPreview: process.env.NEXT_PUBLIC_AD_PREVIEW === "true",
 };
 

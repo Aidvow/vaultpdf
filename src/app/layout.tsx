@@ -50,6 +50,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  ...(SITE_CONFIG.gscVerification
+    ? {
+        verification: {
+          google: SITE_CONFIG.gscVerification,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
