@@ -7,10 +7,62 @@ import {
   CheckCircle2,
   BookOpen,
   Terminal,
+  HelpCircle,
 } from "lucide-react";
 import { GUIDES, SITE_CONFIG, TOOLS } from "@/lib/site";
 import { ToolIcon } from "@/components/ToolIcon";
 import { AdSlot } from "@/components/AdSlot";
+
+const HOME_FAQS = [
+  {
+    question: "How does VaultPDF process PDF files without uploading them?",
+    answer:
+      "Every tool on VaultPDF runs directly inside your web browser using local JavaScript memory (ArrayBuffers) and pdf-lib. Your computer reads the file from disk, performs the merge, split, rotation, watermark, or metadata scrub locally, and saves the new PDF straight back to your Downloads folder—with zero server upload requests.",
+  },
+  {
+    question: "Is VaultPDF safe for confidential contracts, tax forms, and IDs?",
+    answer:
+      "Yes. Because zero bytes of your documents ever travel across the internet or touch third-party cloud buckets, VaultPDF is designed for GDPR-conscious European teams, freelancers under client NDAs, students submitting transcripts, and anyone handling passports or W-2 tax forms.",
+  },
+  {
+    question: "Do I need to create an account or pay a monthly subscription?",
+    answer:
+      "No. All eight PDF utilities are completely free with no forced signups, no daily merge caps, and no branding watermarks added to your files. The site is supported by non-intrusive display ads placed cleanly outside the tool workspaces.",
+  },
+  {
+    question: "Which browsers and operating systems are supported?",
+    answer:
+      "VaultPDF works on modern versions of Chrome, Edge, Safari, Firefox, and Brave across Windows 11/10, macOS, Linux, Chromebooks, iOS, and Android. Once a page has loaded, the tools even continue working offline.",
+  },
+];
+
+const COMPARISON_ROWS = [
+  {
+    dimension: "File transfer & privacy",
+    local: "0 bytes uploaded — processed strictly in browser RAM",
+    cloud: "Full document uploaded to remote third-party servers",
+  },
+  {
+    dimension: "Processing speed",
+    local: "Instant local execution (no upload or server queue)",
+    cloud: "Depends on internet upload speed and server load",
+  },
+  {
+    dimension: "GDPR & NDA risk",
+    local: "No third-party data processor involved",
+    cloud: "Requires trusting cloud retention & deletion policies",
+  },
+  {
+    dimension: "File caps & paywalls",
+    local: "Free with no forced login or daily task limits",
+    cloud: "Often capped at 2 tasks/day or locked behind trials",
+  },
+  {
+    dimension: "Offline capability",
+    local: "Works even in Airplane Mode after initial load",
+    cloud: "Requires continuous high-speed internet connection",
+  },
+];
 
 export default function HomePage() {
   const orgSchema = {
@@ -21,11 +73,28 @@ export default function HomePage() {
     description: SITE_CONFIG.description,
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: HOME_FAQS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Hero Section — Minimalist Stripe / Swiss Grid */}
@@ -42,10 +111,10 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-              Merge contracts, split tax forms, convert receipts, add
-              watermarks, and scrub hidden resume metadata directly inside your
-              browser. Fast, free, and verifiable for GDPR-conscious teams and
-              individuals.
+              Merge contracts, split tax forms, delete blank scans, convert
+              receipts, inspect paper sizes, and scrub hidden resume metadata
+              directly inside your browser. Fast, free, and verifiable for
+              GDPR-conscious teams and individuals.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -104,7 +173,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Core Tool Matrix */}
+      {/* Core Tool Matrix (8 Tools — Crisp 4x2 Swiss Grid) */}
       <section
         id="tools"
         className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8"
@@ -119,36 +188,37 @@ export default function HomePage() {
             </h2>
           </div>
           <p className="text-sm text-slate-500">
-            6 focused tools · Works on Windows, macOS, Linux, and mobile
+            {TOOLS.length} focused tools · Works on Windows, macOS, Linux, and
+            mobile
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TOOLS.map((tool) => (
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}`}
-              className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 transition-all hover:border-slate-300 hover:shadow-md hover:shadow-slate-900/[0.04]"
+              className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:border-slate-300 hover:shadow-md hover:shadow-slate-900/[0.04]"
             >
               <div>
-                <div className="flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-colors group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-600">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-colors group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-600">
                     <ToolIcon slug={tool.slug} className="h-5 w-5" />
                   </span>
-                  <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[11px] font-medium text-slate-600">
+                  <span className="truncate rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[11px] font-medium text-slate-600">
                     {tool.badge || tool.category}
                   </span>
                 </div>
 
-                <h3 className="mt-5 text-base font-semibold text-slate-900 group-hover:text-blue-700">
+                <h3 className="mt-4 text-[15px] font-semibold text-slate-900 group-hover:text-blue-700">
                   {tool.name}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                   {tool.tagline}
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-slate-900 group-hover:text-blue-600">
+              <div className="mt-5 flex items-center gap-1.5 text-xs font-semibold text-slate-900 group-hover:text-blue-600">
                 Open tool
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>
@@ -236,10 +306,45 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+
+          {/* Local vs. Cloud Comparison Table */}
+          <div className="mt-14">
+            <h3 className="text-lg font-semibold tracking-tight text-slate-900">
+              How {SITE_CONFIG.name} compares to cloud-upload PDF websites
+            </h3>
+            <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+              <table className="w-full border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50/80 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    <th className="px-5 py-3.5">Capability</th>
+                    <th className="px-5 py-3.5 text-emerald-800">
+                      {SITE_CONFIG.name} (Local Browser)
+                    </th>
+                    <th className="px-5 py-3.5">Traditional Cloud PDF Sites</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
+                  {COMPARISON_ROWS.map((row) => (
+                    <tr key={row.dimension}>
+                      <td className="px-5 py-3.5 font-medium text-slate-900">
+                        {row.dimension}
+                      </td>
+                      <td className="px-5 py-3.5 text-emerald-900">
+                        {row.local}
+                      </td>
+                      <td className="px-5 py-3.5 text-slate-500">
+                        {row.cloud}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Original Editorial Guides Section */}
+      {/* Original Editorial Guides Section (6 Featured + Link to All 8) */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
@@ -254,13 +359,13 @@ export default function HomePage() {
             href="/guides"
             className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
           >
-            Read all guides
+            Read all {GUIDES.length} guides
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {GUIDES.map((guide) => (
+          {GUIDES.slice(0, 6).map((guide) => (
             <Link
               key={guide.slug}
               href={`/guides/${guide.slug}`}
@@ -288,6 +393,35 @@ export default function HomePage() {
               </span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Homepage FAQ Section */}
+      <section className="border-t border-slate-200/80 bg-slate-50/40 py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2">
+            <HelpCircle className="h-5 w-5 text-slate-400" />
+            <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <p className="mt-2 text-sm text-slate-600">
+            Clear answers on local execution, privacy guarantees, and browser
+            compatibility.
+          </p>
+
+          <div className="mt-6 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+            {HOME_FAQS.map((item) => (
+              <div key={item.question} className="p-5 sm:p-6">
+                <h3 className="text-sm font-semibold text-slate-900 sm:text-base">
+                  {item.question}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  {item.answer}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

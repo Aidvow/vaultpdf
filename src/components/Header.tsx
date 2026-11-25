@@ -56,8 +56,8 @@ export function Header() {
             </button>
 
             {toolsOpen && (
-              <div className="absolute left-0 top-full w-80 pt-1.5">
-                <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-lg shadow-slate-900/5">
+              <div className="absolute left-0 top-full w-[540px] pt-1.5">
+                <div className="grid grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-white p-2.5 shadow-lg shadow-slate-900/5">
                   {TOOLS.map((tool) => (
                     <Link
                       key={tool.slug}

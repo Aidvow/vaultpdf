@@ -104,7 +104,7 @@ export default function AboutPage() {
             Ready to process a document privately?
           </h2>
           <p className="mt-1 text-sm text-slate-600">
-            Jump straight into any of our six browser-native PDF tools—no sign
+            Jump straight into any of our eight browser-native PDF tools—no sign
             up required.
           </p>
           <Link

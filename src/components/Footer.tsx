@@ -63,7 +63,7 @@ export function Footer() {
                   All Guides
                 </Link>
               </li>
-              {GUIDES.map((guide) => (
+              {GUIDES.slice(0, 5).map((guide) => (
                 <li key={guide.slug}>
                   <Link
                     href={`/guides/${guide.slug}`}

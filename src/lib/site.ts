@@ -1,3 +1,5 @@
+export { GUIDES, getGuideBySlug, type GuideArticle } from "./guides";
+
 export interface ToolFaq {
   question: string;
   answer: string;
@@ -8,9 +10,11 @@ export interface ToolDefinition {
     | "merge-pdf"
     | "split-pdf"
     | "rotate-reorder-pdf"
+    | "delete-pdf-pages"
     | "images-to-pdf"
     | "watermark-pdf"
-    | "remove-pdf-metadata";
+    | "remove-pdf-metadata"
+    | "inspect-pdf";
   name: string;
   shortName: string;
   tagline: string;
@@ -23,21 +27,6 @@ export interface ToolDefinition {
   useCases: string[];
   privacyNote: string;
   faqs: ToolFaq[];
-}
-
-export interface GuideArticle {
-  slug: string;
-  title: string;
-  excerpt: string;
-  publishedAt: string;
-  readTime: string;
-  category: string;
-  relatedToolSlug: ToolDefinition["slug"];
-  sections: {
-    heading: string;
-    paragraphs: string[];
-    bullets?: string[];
-  }[];
 }
 
 export const SITE_CONFIG = {
@@ -371,118 +360,106 @@ export const TOOLS: ToolDefinition[] = [
       },
     ],
   },
-];
-
-export const GUIDES: GuideArticle[] = [
   {
-    slug: "why-browser-based-pdf-processing-protects-sensitive-documents",
-    title:
-      "Why Browser-Based PDF Processing Protects Sensitive Contracts & Tax Forms",
-    excerpt:
-      "Most free online PDF sites quietly upload your contracts, resumes, and ID scans to remote cloud servers. Here is how client-side processing works and how to verify it yourself.",
-    publishedAt: "2026-11-18",
-    readTime: "4 min read",
-    category: "Privacy & Security",
-    relatedToolSlug: "merge-pdf",
-    sections: [
+    slug: "delete-pdf-pages",
+    name: "Delete PDF Pages",
+    shortName: "Delete Pages",
+    tagline: "Remove blank sheets, cover pages, or sensitive annexes in one click.",
+    description:
+      "Click any unwanted page to remove it and export a freshly serialized, smaller PDF directly inside your browser—zero server uploads.",
+    seoTitle: "Delete Pages from PDF Locally — Remove Blank PDF Pages Free",
+    seoDescription:
+      "Remove unwanted, blank, or confidential pages from any PDF 100% locally in your browser. Free, instant, and no cloud uploads.",
+    category: "Organize",
+    steps: [
       {
-        heading: "The hidden risk of traditional 'free' PDF websites",
-        paragraphs: [
-          "When you drop a signed employment contract, W-2 tax return, or passport scan onto a conventional web-based PDF tool, your browser sends the entire file across the internet to a third-party server. Even when a provider promises to delete uploaded files after one or two hours, your document temporarily resides on infrastructure you do not control—subject to server logs, backup snapshots, or misconfigured cloud buckets.",
-          "For professionals working under GDPR in Europe, strict client NDAs in the United States, or university data-handling guidelines, casually uploading sensitive files to unknown web utilities creates unnecessary compliance risk.",
-        ],
+        title: "Open your PDF locally",
+        body: "Drop any PDF into the workspace to view every page tile with its dimensions and page number.",
       },
       {
-        heading: "How 100% local in-browser PDF processing works",
-        paragraphs: [
-          "Modern browsers are remarkably capable computing environments. Using JavaScript ArrayBuffers and low-level PDF parsing libraries like pdf-lib, your browser can read a PDF file directly from your local disk into volatile RAM, restructure page trees, embed images, or stamp vector watermarks, and then trigger a local Blob download—without ever making an HTTP POST request.",
-        ],
-        bullets: [
-          "Zero network transfer: Files remain inside your browser tab's memory sandbox.",
-          "Instant speed: Eliminating upload and download latency makes multi-megabyte merges nearly instantaneous.",
-          "Offline resilience: Once the web application assets are loaded, the core tools work even in Airplane Mode.",
-        ],
+        title: "Click pages to mark for removal",
+        body: "Click individual pages or use quick presets (First, Last, Even Pages) to select blank or unnecessary sheets.",
       },
       {
-        heading: "How you can verify zero uploads in 15 seconds",
-        paragraphs: [
-          "You should never have to take any privacy claim on faith. In Chrome, Edge, Firefox, or Safari, open Developer Tools (F12 or Cmd+Option+I), switch to the Network tab, and filter by Fetch/XHR. Now drop a PDF into VaultPDF and run any operation. You will observe zero outgoing file uploads—confirming cryptographically and empirically that your document stays on your machine.",
-        ],
+        title: "Download your trimmed PDF",
+        body: "VaultPDF copies only the remaining pages into a fresh clean PDF file directly on your device.",
+      },
+    ],
+    useCases: [
+      "Removing accidental blank trailing pages from exported Word or Google Docs files",
+      "Stripping sensitive salary or account appendix pages before sharing a packet",
+      "Deleting cover pages or instruction sheets from government and tax PDFs",
+      "Trimming duplicate duplex-scanned pages from office scanner exports",
+    ],
+    privacyNote:
+      "When you delete a sensitive page from a contract or financial statement, uploading the full unedited PDF to a cloud server defeats the purpose. VaultPDF trims pages strictly in local browser memory.",
+    faqs: [
+      {
+        question: "Does deleting pages permanently remove them from the new PDF?",
+        answer:
+          "Yes. VaultPDF creates a brand-new PDF container and copies only the kept pages, ensuring removed pages are completely absent from the downloaded file.",
+      },
+      {
+        question: "Will deleting pages affect my original PDF on disk?",
+        answer:
+          "Never. Your original file stays untouched on your device and the trimmed version is downloaded as a separate `-trimmed.pdf` file.",
+      },
+      {
+        question: "Can I remove every even-numbered blank page from a duplex scan?",
+        answer:
+          "Yes. Use the 'Mark Even Pages' preset button to mark all even pages in one click, then download your cleaned document.",
       },
     ],
   },
   {
-    slug: "hidden-metadata-inside-your-pdf-resume-and-how-to-remove-it",
-    title:
-      "What Hidden Metadata Lives Inside Your PDF Resume (And How to Scrub It)",
-    excerpt:
-      "Exporting a resume or client proposal to PDF often leaks your PC username, old template titles, and edit timestamps. Learn what gets embedded and how to clean it in seconds.",
-    publishedAt: "2026-11-20",
-    readTime: "5 min read",
-    category: "Career & Privacy",
-    relatedToolSlug: "remove-pdf-metadata",
-    sections: [
+    slug: "inspect-pdf",
+    name: "PDF Inspector & Size Analyzer",
+    shortName: "PDF Inspector",
+    tagline: "Check exact A4 vs. US Letter page sizes, orientation, rotation, and metadata.",
+    description:
+      "Run a fast local pre-flight check on any PDF before printing or submitting to visa, university, or publishing portals.",
+    seoTitle: "PDF Inspector — Check PDF Page Size (A4 vs US Letter) Locally",
+    seoDescription:
+      "Inspect PDF page dimensions in mm, inches, and points, detect A4 vs US Letter mismatches, rotation flags, and metadata 100% locally.",
+    category: "Security & Privacy",
+    badge: "Pre-Flight Check",
+    steps: [
       {
-        heading: "What software silently writes into your PDF header",
-        paragraphs: [
-          "Every standard PDF file contains an internal Information Dictionary. When you click 'Save as PDF' in Microsoft Word, LibreOffice, Canva, or macOS Preview, the application automatically populates metadata properties you rarely see on screen.",
-        ],
-        bullets: [
-          "Author: Often defaults to your full operating system username or a previous template author's name.",
-          "Title & Subject: Frequently retains an old filename like 'Resume_Draft_v3_OldCompany' even after you rename the file.",
-          "Creator & Producer: Reveals exact operating system and software versions.",
-          "CreationDate & ModDate: Exposes exact timestamps and time zones showing when the file was created or revised.",
-        ],
+        title: "Drop any PDF to analyze",
+        body: "Select a resume, thesis, print layout, or visa packet to inspect its internal structure locally.",
       },
       {
-        heading: "Real-world scenarios where PDF metadata causes embarrassment",
-        paragraphs: [
-          "Recruiters and ATS portals often display the internal PDF Title field in browser tabs instead of the filename. Imagine submitting a tailored application to Company B while the browser tab header still reads 'Cover Letter - Company A'.",
-          "Similarly, freelancers and consultants who duplicate an older client proposal frequently forget that the prior client's name or internal project code remains embedded in the PDF's Author, Subject, or Keywords fields.",
-        ],
+        title: "Review paper size & orientation flags",
+        body: "Instantly spot mixed A4 and US Letter sheets, sideways rotation flags, encryption status, and embedded metadata.",
       },
       {
-        heading: "A 10-second pre-send hygiene checklist",
-        paragraphs: [
-          "Before emailing any resume, legal filing, grant proposal, or public whitepaper, inspect it with VaultPDF's local Metadata Inspector. Scrubbing all hidden fields takes one click, leaves visual formatting 100% untouched, and ensures you only share what is actually visible on the page.",
-        ],
+        title: "Fix issues with companion tools",
+        body: "If you detect sideways scans or leaked Author tags, jump straight to Rotate & Organize or Strip Metadata.",
       },
     ],
-  },
-  {
-    slug: "prepare-clean-pdf-packets-for-visa-tax-and-job-applications",
-    title:
-      "How to Assemble Clean PDF Packets for Visa, Mortgage, and Job Applications",
-    excerpt:
-      "Portals reject upside-down scans, unnumbered multi-file bundles, and raw smartphone photos. Follow this 4-step workflow to build crisp, submission-ready PDF packets locally.",
-    publishedAt: "2026-11-22",
-    readTime: "5 min read",
-    category: "Productivity",
-    relatedToolSlug: "images-to-pdf",
-    sections: [
+    useCases: [
+      "Checking whether an international resume or transcript is A4 or US Letter before printing",
+      "Auditing merged PDF packets for mixed paper sizes before uploading to strict government portals",
+      "Verifying page rotation flags and orientation consistency across scanned books or slides",
+      "Running a quick privacy and metadata health check before publishing PDFs online",
+    ],
+    privacyNote:
+      "Inspecting internal document properties requires zero external APIs. VaultPDF reads your PDF header and page geometry exclusively inside local browser RAM.",
+    faqs: [
       {
-        heading: "Why official portals and reviewers love clean single-file packets",
-        paragraphs: [
-          "Whether you are applying for a US/Schengen visa, submitting mortgage underwriting documents, or sending an academic graduate packet, reviewers often open dozens of applications per hour. Sending six separate JPGs alongside two sideways PDFs slows review and increases the chance of missing a required attachment.",
-        ],
+        question: "How does PDF Inspector distinguish A4 from US Letter?",
+        answer:
+          "Every PDF page declares its exact size in PostScript points (72 pt = 1 inch). VaultPDF converts those coordinates to millimeters and inches, recognizing ISO A4 (210 × 297 mm), US Letter (8.5 × 11 in), US Legal, A3, A5, and Tabloid automatically.",
       },
       {
-        heading: "The 4-step submission-ready workflow",
-        paragraphs: [
-          "You can prepare an executive-grade document packet in under two minutes without installing heavy desktop software:",
-        ],
-        bullets: [
-          "Step 1 — Convert photos to standard pages: Use Images to PDF to turn smartphone scans of IDs or receipts into uniform A4 (Europe) or US Letter (North America) pages.",
-          "Step 2 — Fix orientation & remove blanks: Open Rotate & Organize PDF to rotate any sideways pages 90° and strip accidental blank scanner sheets.",
-          "Step 3 — Merge in checklist order: Use Merge PDF to combine every section in the exact order requested by the application checklist.",
-          "Step 4 — Add page numbers or protective stamps: Use Watermark & Numbers to add 'Page X of Y' footers—or stamp 'COPY FOR VISA APPLICATION ONLY' across sensitive ID copies.",
-        ],
+        question: "Why do mixed paper sizes matter when printing?",
+        answer:
+          "Mixing A4 and US Letter pages in one PDF often causes printers to clip bottom footers or shrink text unexpectedly. Detecting mismatches ahead of time avoids wasted paper and rejected submissions.",
       },
       {
-        heading: "Final check before hitting submit",
-        paragraphs: [
-          "Give the final file a clear, descriptive filename using hyphens rather than spaces (for example, `Jane-Doe-Application-Packet-2026.pdf`), open it once in your browser to verify page flow, and strip unnecessary metadata if the document will be archived publicly.",
-        ],
+        question: "Does inspecting a PDF modify the file?",
+        answer:
+          "No. PDF Inspector is strictly read-only and never alters your file or uploads any bytes over the network.",
       },
     ],
   },
@@ -490,8 +467,4 @@ export const GUIDES: GuideArticle[] = [
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {
   return TOOLS.find((t) => t.slug === slug);
-}
-
-export function getGuideBySlug(slug: string): GuideArticle | undefined {
-  return GUIDES.find((g) => g.slug === slug);
 }

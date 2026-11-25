@@ -5,9 +5,11 @@ import { ToolPageShell } from "@/components/ToolPageShell";
 import { MergePdfTool } from "@/components/tools/MergePdfTool";
 import { SplitPdfTool } from "@/components/tools/SplitPdfTool";
 import { OrganizePdfTool } from "@/components/tools/OrganizePdfTool";
+import { DeletePdfPagesTool } from "@/components/tools/DeletePdfPagesTool";
 import { ImagesToPdfTool } from "@/components/tools/ImagesToPdfTool";
 import { WatermarkPdfTool } from "@/components/tools/WatermarkPdfTool";
 import { MetadataPdfTool } from "@/components/tools/MetadataPdfTool";
+import { InspectPdfTool } from "@/components/tools/InspectPdfTool";
 
 interface ToolPageProps {
   params: Promise<{ slug: string }>;
@@ -54,12 +56,16 @@ export default async function ToolPage({ params }: ToolPageProps) {
         return <SplitPdfTool />;
       case "rotate-reorder-pdf":
         return <OrganizePdfTool />;
+      case "delete-pdf-pages":
+        return <DeletePdfPagesTool />;
       case "images-to-pdf":
         return <ImagesToPdfTool />;
       case "watermark-pdf":
         return <WatermarkPdfTool />;
       case "remove-pdf-metadata":
         return <MetadataPdfTool />;
+      case "inspect-pdf":
+        return <InspectPdfTool />;
     }
   }
 
