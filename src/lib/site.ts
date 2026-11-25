@@ -60,7 +60,7 @@ export const TOOLS: ToolDefinition[] = [
     tagline: "Combine multiple PDF documents into a single file locally.",
     description:
       "Join contracts, invoices, tax statements, or study packets in seconds without uploading private files to external servers.",
-    seoTitle: "Merge PDF Locally — Free Zero-Upload PDF Combiner | VaultPDF",
+    seoTitle: "Merge PDF Locally — Free Zero-Upload PDF Combiner",
     seoDescription:
       "Combine multiple PDF files into one document 100% inside your browser. No server uploads, no watermarks, and no registration required.",
     category: "Organize",
@@ -112,7 +112,7 @@ export const TOOLS: ToolDefinition[] = [
     tagline: "Extract exact page ranges or burst every page into individual PDFs.",
     description:
       "Pull out signature pages, single chapters, or specific invoices from large PDF packets with zero cloud uploads.",
-    seoTitle: "Split PDF Online Privately — Extract PDF Pages Locally | VaultPDF",
+    seoTitle: "Split PDF Online Privately — Extract PDF Pages Locally",
     seoDescription:
       "Extract specific pages or split every page of a PDF into separate files 100% locally in your browser. Free, fast, and zero uploads.",
     category: "Organize",
@@ -163,7 +163,7 @@ export const TOOLS: ToolDefinition[] = [
     tagline: "Fix sideways scans, reorder pages, and delete unwanted sheets.",
     description:
       "Visually reorganize page order, rotate landscape scans by 90°, and remove blank pages cleanly inside your browser.",
-    seoTitle: "Rotate & Reorder PDF Pages Locally — Zero Upload | VaultPDF",
+    seoTitle: "Rotate & Reorder PDF Pages Locally — Zero Upload",
     seoDescription:
       "Rotate sideways PDF pages, reorder page sequence, or delete blank pages entirely in your browser. Private, instant, and free.",
     category: "Organize",
@@ -214,7 +214,7 @@ export const TOOLS: ToolDefinition[] = [
     tagline: "Turn JPG, PNG, and WebP photos into a crisp, print-ready PDF.",
     description:
       "Convert scanned receipts, ID photos, whiteboard notes, or design mockups into standard US Letter, A4, or exact-fit PDFs locally.",
-    seoTitle: "Images to PDF Converter (JPG, PNG, WebP) — 100% Local | VaultPDF",
+    seoTitle: "Images to PDF Converter (JPG, PNG, WebP) — 100% Local",
     seoDescription:
       "Convert JPG, PNG, and WebP images into a clean A4 or US Letter PDF directly in your browser without uploading photos to the cloud.",
     category: "Convert",
@@ -265,7 +265,7 @@ export const TOOLS: ToolDefinition[] = [
     tagline: "Stamp diagonal text watermarks and clean footer page numbers.",
     description:
       "Mark drafts as CONFIDENTIAL, protect client proposals, or add professional 'Page X of Y' footers to contracts and academic papers.",
-    seoTitle: "Add Watermark & Page Numbers to PDF Locally | VaultPDF",
+    seoTitle: "Add Watermark & Page Numbers to PDF Locally",
     seoDescription:
       "Add custom diagonal watermarks and clean page numbers to any PDF inside your browser. Zero server uploads, tailored for legal and business files.",
     category: "Polish",
@@ -316,7 +316,7 @@ export const TOOLS: ToolDefinition[] = [
     tagline: "Reveal and erase hidden Author, Creator, software, and timestamp data.",
     description:
       "Audit hidden metadata embedded inside resumes, legal filings, and client proposals—and scrub every sensitive tag in one click.",
-    seoTitle: "Remove PDF Metadata Online — Inspect & Scrub Hidden PDF Info | VaultPDF",
+    seoTitle: "Remove PDF Metadata Online — Inspect & Scrub Hidden PDF Info",
     seoDescription:
       "Inspect and remove hidden Author, Creator, Producer, Subject, and timestamp metadata from PDFs 100% locally in your browser.",
     category: "Security & Privacy",
