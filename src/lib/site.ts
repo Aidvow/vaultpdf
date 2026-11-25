@@ -49,7 +49,9 @@ export const SITE_CONFIG = {
   contactEmail: "hello@vaultpdf.tools",
   adsenseId: process.env.NEXT_PUBLIC_ADSENSE_ID || "",
   gaId: process.env.NEXT_PUBLIC_GA_ID || "",
-  gscVerification: process.env.NEXT_PUBLIC_GSC_VERIFICATION || "",
+  gscVerification:
+    process.env.NEXT_PUBLIC_GSC_VERIFICATION ||
+    "nPEOoO50GDWMKsrex6EVBG6ueSVCNd_lr42_NKRxgqI",
   showAdPreview: process.env.NEXT_PUBLIC_AD_PREVIEW === "true",
 };
 
