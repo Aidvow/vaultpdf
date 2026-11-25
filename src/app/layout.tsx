@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  ...(SITE_CONFIG.gscVerification
+  ...(SITE_CONFIG.gscVerification.length > 0
     ? {
         verification: {
           google: SITE_CONFIG.gscVerification,
