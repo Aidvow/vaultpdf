@@ -57,6 +57,13 @@ export const metadata: Metadata = {
         },
       }
     : {}),
+  ...(SITE_CONFIG.adsenseId
+    ? {
+        other: {
+          "google-adsense-account": SITE_CONFIG.adsenseId,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
@@ -69,6 +76,16 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Static Google AdSense tag in <head> so AdSense crawler reliably detects it */}
+        {SITE_CONFIG.adsenseId && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE_CONFIG.adsenseId}`}
+            crossOrigin="anonymous"
+          />
+        )}
+      </head>
       <body className="flex min-h-full flex-col bg-white text-slate-900">
         {/* Google Analytics 4 (activates automatically when NEXT_PUBLIC_GA_ID is set) */}
         {SITE_CONFIG.gaId && (
@@ -86,16 +103,6 @@ export default function RootLayout({
               `}
             </Script>
           </>
-        )}
-
-        {/* Google AdSense (activates automatically when NEXT_PUBLIC_ADSENSE_ID is set) */}
-        {SITE_CONFIG.adsenseId && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE_CONFIG.adsenseId}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
         )}
 
         <Header />

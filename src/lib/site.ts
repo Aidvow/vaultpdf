@@ -51,7 +51,7 @@ export const SITE_CONFIG = {
       ? process.env.NEXT_PUBLIC_SITE_URL
       : "https://www.usevaultpdf.com",
   contactEmail: "hello@usevaultpdf.com",
-  adsenseId: process.env.NEXT_PUBLIC_ADSENSE_ID || "",
+  adsenseId: process.env.NEXT_PUBLIC_ADSENSE_ID || "ca-pub-1542596888670334",
   gaId: process.env.NEXT_PUBLIC_GA_ID || "",
   gscVerification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
     ? [process.env.NEXT_PUBLIC_GSC_VERIFICATION]
